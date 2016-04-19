@@ -11,11 +11,13 @@
 class AdaBoost {
 private:
     SampleContainer samples;
-    std::vector<
+    std::vector<Feature> selectedFeatures;
+    double percentGeneratedFeatures;
 
 public:
 
-    AdaBoost(const SampleContainer &samples);
+    AdaBoost(const SampleContainer &samples, double percentGeneratedFeatures);
+    void run(size_t numOfIteration);
 private:
     void init();
 };
