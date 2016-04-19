@@ -66,6 +66,7 @@ public:static std::vector<Sample> readDataFromFile(const std::string filename) {
 
         delete[] buffer;
         inputStream.close();
+        return readSamples;
     }
 
 };
