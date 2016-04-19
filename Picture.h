@@ -14,16 +14,10 @@ private:
     size_t widthCoordinate;
 
 public:
-    size_t getHeightCoordinate() const {
-        return heightCoordinate;
-    }
+    Pixel(size_t heightCoordinate, size_t widthCoordinate);
 
-    size_t getWidthCoordinate() const {
-        return widthCoordinate;
-    }
-
-    Pixel(size_t heightCoordinate, size_t widthCoordinate) : heightCoordinate(heightCoordinate),
-                                                             widthCoordinate(widthCoordinate) { }
+    size_t getHeightCoordinate() const;
+    size_t getWidthCoordinate() const;
 };
 
 class Picture {
@@ -33,10 +27,8 @@ private:
     std::vector<intensity> pixels;
 
 public:
-    Picture(size_t height, size_t width, const std::vector<intensity> &pixels) : height(height), width(width),
+    Picture(size_t height, size_t width, const std::vector<intensity> &pixels);
 
-                                                                                 pixels(pixels) { }
-
-    intensity getPixelIntensity(Pixel &pixel);
+    intensity getPixelIntensity(const Pixel &pixel) const;
 };
 

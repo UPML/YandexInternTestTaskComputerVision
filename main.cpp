@@ -4,10 +4,11 @@
 #include <vector>
 #include "Sample.h"
 #include "Utils.h"
+#include "SampleContainer.h"
+
 int main() {
 
     std::vector<Sample> samples = Utils().readDataFromFile("data/16x16/samples00.vec");
-    int a = 2;
-
+    SampleContainer sampleContainer = SampleContainer(samples);
     return 0;
 }

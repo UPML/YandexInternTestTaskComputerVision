@@ -6,24 +6,24 @@
 
 
 #include "Picture.h"
+#include "Feature.h"
 
 class Sample {
 private:
     Picture picture;
-    bool isMale;
+    bool male;
+    double weight;
 
 
 public:
-    const Picture &getPicture() const {
-        return picture;
-    }
+    Sample(Picture &picture, bool isMale);
 
-    bool isIsMale() const {
-        return isMale;
-    }
+    double getWeight() const;
+    void setWeight(double weight);
+    const Picture &getPicture() const;
+    bool isMale() const;
+    double getError(const Feature &feature) const ;
 
-public:
-    Sample(Picture &picture, bool isMale) : picture(picture), isMale(isMale) { }
 };
 
 
