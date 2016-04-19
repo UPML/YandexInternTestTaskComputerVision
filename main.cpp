@@ -1,8 +1,12 @@
 #include <iostream>
-
-using namespace std;
+#include <vector>
+#include "Sample.h"
+#include "Utils.h"
 
 int main() {
-    cout << "Hello, World!" << endl;
+
+    std::vector<Sample> samples = Utils().readDataFromFile("data/16x16/samples00.vec");
+    int a = 2;
+
     return 0;
 }
