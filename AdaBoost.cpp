@@ -29,10 +29,9 @@ void AdaBoost::doIteration() {
     std::vector<Feature> newTestedFeature;
     while (newTestedFeature.size() < percentGeneratedFeatures * samples.getSize() * FEATURE_NUMBER) {
         Feature nextRandomFeature = samples.getRandomFeature();
-        /*if (std::find(newTestedFeature.begin(), newTestedFeature.end(), nextRandomFeature) == newTestedFeature.end() &&
-            std::find(selectedFeatures.begin(), selectedFeatures.end(), nextRandomFeature) == selectedFeatures.end()) {
-         */   newTestedFeature.push_back(nextRandomFeature);
-        //}
+        //изначально проверял, что раньше такой фичи не встречалось, но из-за этой проверки итерация выполнялась
+        // очень долго
+        newTestedFeature.push_back(nextRandomFeature);
     }
 
     double minError = 1;
@@ -44,9 +43,7 @@ void AdaBoost::doIteration() {
         }
     }
     selectedFeatures.push_back(bestFeature);
-    // std::cout << "minError" << minError << "\n";
     double nextB_t = minError / (1 - minError);
-    // std::cout << "Bt " << nextB_t << "\n";
     B_t.push_back(nextB_t);
     samples.updateWeights(bestFeature, nextB_t);
 }

@@ -44,7 +44,7 @@ Scorer::Scorer() {
 
 double Scorer::getScore(const std::string &pictureSize) {
     assert(pictureSize == "16x16" || pictureSize == "20x20" || pictureSize == "24x24");
-    std::string inputDataFilename = "/data/" + pictureSize + "/samples00.vec";
+    std::string inputDataFilename = "data/" + pictureSize + "/samples00.vec";
     std::vector<Sample> samples = Utils().readDataFromFile(inputDataFilename);
     std::vector<Sample> train;
     std::vector<Sample> test;
@@ -57,7 +57,7 @@ double Scorer::getScore(const std::string &pictureSize) {
     }
     AdaBoost adaBoost = AdaBoost(train, 0.01);
     std::fstream fsOutput;
-    fsOutput.open("result20x20.txt", std::fstream::out | std::fstream::app);
+    fsOutput.open("result" + pictureSize + ".txt", std::fstream::out | std::fstream::app);
     clock_t startIterate = std::clock();
     for (size_t i = 0; i < 1000; ++i) {
         adaBoost.run(1);
