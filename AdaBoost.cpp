@@ -5,6 +5,7 @@
 #include <set>
 #include "AdaBoost.h"
 #include <algorithm>
+#include <iostream>
 
 void AdaBoost::init() {
     samples.initializeWeight();
@@ -36,14 +37,16 @@ void AdaBoost::doIteration() {
 
     double minError = 1;
     Feature bestFeature = *newTestedFeature.begin();
-    for (Feature feature : newTestedFeature){
-        if(minError > samples.getError(feature)) {
+    for (Feature feature : newTestedFeature) {
+        if (minError > samples.getError(feature)) {
             minError = samples.getError(feature);
             bestFeature = feature;
         }
     }
     selectedFeatures.push_back(bestFeature);
-    double_t nextB_t = minError / (1 - minError);
+    // std::cout << "minError" << minError << "\n";
+    double nextB_t = minError / (1 - minError);
+    // std::cout << "Bt " << nextB_t << "\n";
     B_t.push_back(nextB_t);
     samples.updateWeights(bestFeature, nextB_t);
 }

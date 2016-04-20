@@ -21,14 +21,14 @@ const Pixel &Feature::getSecondPixel() const {
     return secondPixel;
 }
 
-size_t Feature::getFeatureIndex() const  {
+size_t Feature::getFeatureIndex() const {
     return featureIndex;
 }
 
 const bool Feature::operator<(const Feature &otherFeature) const {
-    if(firstPixel != otherFeature.getFirstPixel()){
+    if (firstPixel != otherFeature.getFirstPixel()) {
         return firstPixel < otherFeature.getFirstPixel();
-    } else if(secondPixel != otherFeature.getSecondPixel()) {
+    } else if (secondPixel != otherFeature.getSecondPixel()) {
         return secondPixel < otherFeature.getSecondPixel();
     } else {
         return featureIndex < otherFeature.getFeatureIndex();

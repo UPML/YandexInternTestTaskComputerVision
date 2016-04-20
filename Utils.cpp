@@ -4,7 +4,7 @@
 
 #include "Utils.h"
 
-std::vector<Sample> Utils::readDataFromFile(const std::string filename)  {
+std::vector<Sample> Utils::readDataFromFile(const std::string filename) {
     std::ifstream inputStream;
     inputStream.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
     if (!inputStream.is_open()) {

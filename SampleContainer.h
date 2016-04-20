@@ -3,6 +3,7 @@
 //
 
 #pragma once
+
 #include <vector>
 #include "Sample.h"
 #include "Feature.h"
@@ -19,7 +20,7 @@ public:
 
     void initializeWeight();
 
-    void updateWeights(Feature feature, double B);
+    void updateWeights(const Feature &feature, double B);
 
     double getError(const Feature &feature) const;
 

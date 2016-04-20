@@ -18,13 +18,18 @@ private:
 
 public:
     Sample(Picture &picture, bool isMale);
+
     Sample();
 
     double getWeight() const;
+
     void setWeight(double weight);
+
     const Picture &getPicture() const;
+
     bool isMale() const;
-    double getError(const Feature &feature) const ;
+
+    double getError(const Feature &feature) const;
 
     double getPrediction(const Feature &feature) const;
 };

@@ -7,10 +7,10 @@
 #include <exception>
 #include <string>
 
-class MessageException: std::exception {
+class MessageException : std::exception {
 
 public:
-    MessageException(std::string  message);
+    MessageException(std::string message);
 };
 
 

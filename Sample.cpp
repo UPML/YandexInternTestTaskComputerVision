@@ -34,7 +34,7 @@ bool absDifferenceLessThan(const Picture picture, const Feature &feature, size_t
 }
 
 double Sample::getError(const Feature &feature) const {
-       return (getPrediction(feature) != isMale()) * getWeight();
+    return (getPrediction(feature) != isMale()) * getWeight();
 }
 
 Sample::Sample() {
@@ -56,7 +56,7 @@ double Sample::getPrediction(const Feature &feature) const {
     if (feature.getFeatureIndex() < FEATURE_NUMBER / 2) {
         return features[feature.getFeatureIndex()];
     } else {
-        return  !features[feature.getFeatureIndex() - FEATURE_NUMBER / 2];
+        return !features[feature.getFeatureIndex() - FEATURE_NUMBER / 2];
     }
 }
 

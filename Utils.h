@@ -12,7 +12,8 @@
 
 class Utils {
 
-public:static std::vector<Sample> readDataFromFile(const std::string filename);
+public:
+    static std::vector<Sample> readDataFromFile(const std::string filename);
 };
 
 

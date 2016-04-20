@@ -16,14 +16,18 @@ private:
     double percentGeneratedFeatures;
 
 public:
-    const std::vector<double> &getB_t() const ;
+    const std::vector<double> &getB_t() const;
+
     AdaBoost(const SampleContainer &samples, double percentGeneratedFeatures);
+
     void run(size_t numOfIteration);
 
 
-    const std::vector<Feature> & getSelectedFeatures() const;
+    const std::vector<Feature> &getSelectedFeatures() const;
+
 private:
     void init();
+
     void doIteration();
 };
 

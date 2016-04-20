@@ -2,6 +2,7 @@
 // Created by kagudkov on 19.04.16.
 //
 
+#include <iostream>
 #include "SampleContainer.h"
 #include "MessageException.h"
 
@@ -26,11 +27,18 @@ void SampleContainer::initializeWeight() {
     }
 }
 
-void SampleContainer::updateWeights(Feature feature, double B) {
-    for(size_t i = 0; i < samples.size(); ++i){
-        if(samples[i].getError(feature) != 0) {
+void SampleContainer::updateWeights(const Feature &feature, double B) {
+    double sumWeight = 0;
+
+    for (size_t i = 0; i < samples.size(); ++i) {
+        if (samples[i].getPrediction(feature) == samples[i].isMale()) {
             samples[i].setWeight(samples[i].getWeight() * B);
         }
+        sumWeight += samples[i].getWeight();
+    }
+
+    for (Sample &sample : samples) {
+        sample.setWeight(sample.getWeight() / sumWeight);
     }
 }
 
