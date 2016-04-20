@@ -3,6 +3,7 @@
 //
 
 
+#include <string>
 #include "Feature.h"
 #include "Sample.h"
 
@@ -19,6 +20,7 @@ public:
                            const std::vector<double> &B_t);
 
 
+    static double getScore(std::string const &pictureSize);
 };
 
 
