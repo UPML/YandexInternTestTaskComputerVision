@@ -27,6 +27,10 @@ size_t Picture::getWidth() const {
     return width;
 }
 
+Picture::Picture() {
+
+}
+
 
 size_t Pixel::getHeightCoordinate() const {
     return heightCoordinate;
@@ -50,6 +54,13 @@ const bool Pixel::operator<(const Pixel &otherPixel) const {
 const bool Pixel::operator!=(const Pixel &otherPixel) const {
     return (*this < otherPixel) || (otherPixel < *this);
 }
+
+Pixel::Pixel() {
+    heightCoordinate = 0;
+    widthCoordinate = 0;
+}
+
+
 
 
 

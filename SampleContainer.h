@@ -2,7 +2,7 @@
 // Created by kagudkov on 19.04.16.
 //
 
-
+#pragma once
 #include <vector>
 #include "Sample.h"
 #include "Feature.h"
@@ -19,9 +19,11 @@ public:
 
     void initializeWeight();
 
+    void updateWeights(Feature feature, double B);
+
     double getError(const Feature &feature) const;
 
-    double getSize() const ;
+    double getSize() const;
 
     Feature getRandomFeature() const;
 

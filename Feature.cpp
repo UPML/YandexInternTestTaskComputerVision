@@ -35,6 +35,17 @@ const bool Feature::operator<(const Feature &otherFeature) const {
     }
 }
 
+const bool Feature::operator==(const Feature &otherFeature) const {
+    return !(*this < otherFeature) && !(otherFeature < *this);
+}
+
+Feature::Feature() {
+    firstPixel = Pixel();
+    secondPixel = Pixel();
+}
+
+
+
 
 
 

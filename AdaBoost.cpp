@@ -8,6 +8,7 @@
 
 void AdaBoost::init() {
     samples.initializeWeight();
+    srand(static_cast<unsigned int> (time(0)));
 }
 
 AdaBoost::AdaBoost(const SampleContainer &samples, double percentGeneratedFeatures)
@@ -24,25 +25,43 @@ void AdaBoost::run(size_t numOfIteration) {
 }
 
 void AdaBoost::doIteration() {
-    std::set<Feature> newTestedFeature;
-    while (newTestedFeature.size() < percentGeneratedFeatures * samples.getSize()) {
+    std::vector<Feature> newTestedFeature;
+    while (newTestedFeature.size() < percentGeneratedFeatures * samples.getSize() * FEATURE_NUMBER) {
         Feature nextRandomFeature = samples.getRandomFeature();
-        if (newTestedFeature.find(nextRandomFeature) == newTestedFeature.end() &&
-            selectedFeatures.find(nextRandomFeature) == selectedFeatures.end()) {
-            newTestedFeature.insert(nextRandomFeature);
-        }
+        /*if (std::find(newTestedFeature.begin(), newTestedFeature.end(), nextRandomFeature) == newTestedFeature.end() &&
+            std::find(selectedFeatures.begin(), selectedFeatures.end(), nextRandomFeature) == selectedFeatures.end()) {
+         */   newTestedFeature.push_back(nextRandomFeature);
+        //}
     }
 
     double minError = 1;
     Feature bestFeature = *newTestedFeature.begin();
-    std::for_each(newTestedFeature.begin(), newTestedFeature.end(), [](Feature const &feature) {
+    for (Feature feature : newTestedFeature){
         if(minError > samples.getError(feature)) {
             minError = samples.getError(feature);
             bestFeature = feature;
         }
-    });
-    selectedFeatures.insert(bestFeature);
+    }
+    selectedFeatures.push_back(bestFeature);
+    double_t nextB_t = minError / (1 - minError);
+    B_t.push_back(nextB_t);
+    samples.updateWeights(bestFeature, nextB_t);
 }
+
+const std::vector<Feature> &AdaBoost::getSelectedFeatures() const {
+    return selectedFeatures;
+}
+
+const std::vector<double> &AdaBoost::getB_t() const {
+    return B_t;
+}
+
+
+
+
+
+
+
 
 
 

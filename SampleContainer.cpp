@@ -4,7 +4,6 @@
 
 #include "SampleContainer.h"
 #include "MessageException.h"
-#include "Feature.h"
 
 SampleContainer::SampleContainer(const std::vector<Sample> &samples) : samples(samples) { }
 
@@ -26,6 +25,15 @@ void SampleContainer::initializeWeight() {
         }
     }
 }
+
+void SampleContainer::updateWeights(Feature feature, double B) {
+    for(size_t i = 0; i < samples.size(); ++i){
+        if(samples[i].getError(feature) != 0) {
+            samples[i].setWeight(samples[i].getWeight() * B);
+        }
+    }
+}
+
 
 size_t SampleContainer::getNumberOfGirls() {
     size_t numberOfGirl = 0;
@@ -52,7 +60,6 @@ double SampleContainer::getSize() const {
 }
 
 Feature SampleContainer::getRandomFeature() const {
-    srand(static_cast<unsigned int> (time(NULL)));
     Pixel first = randomPixel();
     Pixel second = randomPixel();
     return Feature(first, second, static_cast<size_t > (rand() % FEATURE_NUMBER));
@@ -60,9 +67,10 @@ Feature SampleContainer::getRandomFeature() const {
 
 Pixel SampleContainer::randomPixel() const {
     size_t randomHeight = rand() % getSample(0).getPicture().getHeight();
-    size_t randomWidth = rand() % getSample(0).getPicture().getWidth()
+    size_t randomWidth = rand() % getSample(0).getPicture().getWidth();
     return Pixel(randomHeight, randomWidth);
 }
+
 
 
 

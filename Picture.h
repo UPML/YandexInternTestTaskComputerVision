@@ -24,6 +24,7 @@ public:
 
     const bool operator!=(const Pixel &otherPixel) const;
 
+    Pixel();
 };
 
 class Picture {
@@ -40,5 +41,7 @@ public:
     size_t getWidth() const;
 
     intensity getPixelIntensity(const Pixel &pixel) const;
+
+    Picture();
 };
 
