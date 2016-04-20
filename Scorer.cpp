@@ -65,6 +65,7 @@ double Scorer::getScore(const std::string &pictureSize) {
         fsOutput << (std::clock() - startIterate) / static_cast<double > (CLOCKS_PER_SEC) << "\n";
     }
     fsOutput.close();
+    return Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t());
 }
 
 

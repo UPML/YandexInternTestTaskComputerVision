@@ -3,10 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
-#include "Sample.h"
 #include "Utils.h"
-#include "SampleContainer.h"
-#include "AdaBoost.h"
 #include "Scorer.h"
 
 int main() {
