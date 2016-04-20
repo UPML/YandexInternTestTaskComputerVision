@@ -47,6 +47,30 @@ double SampleContainer::getError(const Feature &feature) const {
     return sumError;
 }
 
+double SampleContainer::getSize() const {
+    return samples.size();
+}
+
+Feature SampleContainer::getRandomFeature() const {
+    srand(static_cast<unsigned int> (time(NULL)));
+    Pixel first = randomPixel();
+    Pixel second = randomPixel();
+    return Feature(first, second, static_cast<size_t > (rand() % FEATURE_NUMBER));
+}
+
+Pixel SampleContainer::randomPixel() const {
+    size_t randomHeight = rand() % getSample(0).getPicture().getHeight();
+    size_t randomWidth = rand() % getSample(0).getPicture().getWidth()
+    return Pixel(randomHeight, randomWidth);
+}
+
+
+
+
+
+
+
+
 
 
 

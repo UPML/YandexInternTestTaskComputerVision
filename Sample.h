@@ -8,6 +8,7 @@
 #include "Picture.h"
 #include "Feature.h"
 
+
 class Sample {
 private:
     Picture picture;

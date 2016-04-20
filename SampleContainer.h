@@ -21,10 +21,16 @@ public:
 
     double getError(const Feature &feature) const;
 
+    double getSize() const ;
+
+    Feature getRandomFeature() const;
+
 private:
     size_t getNumberOfGirls();
 
     size_t getNumberOfBoys();
+
+    Pixel randomPixel() const;
 };
 
 

@@ -19,6 +19,15 @@ Picture::Picture(size_t height, size_t width, const std::vector<intensity> &pixe
 
                                                                                       pixels(pixels) { }
 
+size_t Picture::getHeight() const {
+    return height;
+}
+
+size_t Picture::getWidth() const {
+    return width;
+}
+
+
 size_t Pixel::getHeightCoordinate() const {
     return heightCoordinate;
 }
@@ -29,6 +38,24 @@ size_t Pixel::getWidthCoordinate() const {
 
 Pixel::Pixel(size_t heightCoordinate, size_t widthCoordinate) : heightCoordinate(heightCoordinate),
                                                                 widthCoordinate(widthCoordinate) { }
+
+const bool Pixel::operator<(const Pixel &otherPixel) const {
+    if (getWidthCoordinate() != otherPixel.getWidthCoordinate()) {
+        return getWidthCoordinate() < otherPixel.getWidthCoordinate();
+    } else {
+        return getHeightCoordinate() < otherPixel.getHeightCoordinate();
+    }
+}
+
+const bool Pixel::operator!=(const Pixel &otherPixel) const {
+    return (*this < otherPixel) || (otherPixel < *this);
+}
+
+
+
+
+
+
 
 
 

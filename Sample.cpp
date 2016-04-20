@@ -38,7 +38,7 @@ double Sample::getError(const Feature &feature) const {
         throw new MessageException("incorrect feature index");
     }
     std::vector<bool> features;
-    features.reserve(5);
+    features.reserve(FEATURE_NUMBER / 2);
     features.push_back(
             picture.getPixelIntensity(feature.getFirstPixel()) > picture.getPixelIntensity(feature.getSecondPixel()));
     features.push_back(absDifferenceLessThan(picture, feature, 5));
@@ -47,10 +47,10 @@ double Sample::getError(const Feature &feature) const {
     features.push_back(absDifferenceLessThan(picture, feature, 25));
     features.push_back(absDifferenceLessThan(picture, feature, 50));
     bool featureValue = false;
-    if (feature.getFeatureIndex() < 5) {
+    if (feature.getFeatureIndex() < FEATURE_NUMBER / 2) {
         featureValue = features[feature.getFeatureIndex()];
     } else {
-        featureValue = !features[feature.getFeatureIndex() - 5];
+        featureValue = !features[feature.getFeatureIndex() - FEATURE_NUMBER / 2];
     }
     return (featureValue != isMale()) * getWeight();
 }

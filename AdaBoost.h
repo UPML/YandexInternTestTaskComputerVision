@@ -11,7 +11,7 @@
 class AdaBoost {
 private:
     SampleContainer samples;
-    std::vector<Feature> selectedFeatures;
+    std::set<Feature> selectedFeatures;
     double percentGeneratedFeatures;
 
 public:
@@ -20,6 +20,8 @@ public:
     void run(size_t numOfIteration);
 private:
     void init();
+
+    void doIteration();
 };
 
 

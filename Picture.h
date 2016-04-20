@@ -17,7 +17,13 @@ public:
     Pixel(size_t heightCoordinate, size_t widthCoordinate);
 
     size_t getHeightCoordinate() const;
+
     size_t getWidthCoordinate() const;
+
+    const bool operator<(const Pixel &otherPixel) const;
+
+    const bool operator!=(const Pixel &otherPixel) const;
+
 };
 
 class Picture {
@@ -28,6 +34,10 @@ private:
 
 public:
     Picture(size_t height, size_t width, const std::vector<intensity> &pixels);
+
+    size_t getHeight() const;
+
+    size_t getWidth() const;
 
     intensity getPixelIntensity(const Pixel &pixel) const;
 };
