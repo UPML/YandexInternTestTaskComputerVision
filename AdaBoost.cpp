@@ -20,7 +20,7 @@ AdaBoost::AdaBoost(const SampleContainer &samples, double percentGeneratedFeatur
 }
 
 void AdaBoost::run(size_t numOfIteration) {
-    for (int i = 0; i < numOfIteration; ++i) {
+    for (size_t i = 0; i < numOfIteration; ++i) {
         doIteration();
     }
 }
@@ -36,10 +36,15 @@ void AdaBoost::doIteration() {
 
     double minError = 1;
     Feature bestFeature = *newTestedFeature.begin();
-    for (const Feature &feature : newTestedFeature) {
-        if (minError > samples.getError(feature)) {
-            minError = samples.getError(feature);
-            bestFeature = feature;
+#pragma omp parallel for
+    for (size_t i = 0; i < newTestedFeature.size(); ++i) {
+        double nowError = samples.getError(newTestedFeature[i]);
+        if (minError > nowError) {
+#pragma omp critical(updateMin)
+            {
+                minError = samples.getError(newTestedFeature[i]);
+                bestFeature = newTestedFeature[i];
+            }
         }
     }
     selectedFeatures.push_back(bestFeature);

@@ -27,15 +27,14 @@ std::vector<Sample> readDataFromFile(const std::string &filename) {
 
     //Читаем пиксели картинки и заодно пол.
     size_t buf_size = height * width + 1;
-    //todo заменить на unique_ptr
-    char *buffer = new char[buf_size];
+    std::unique_ptr<char[]> buffer(new char[buf_size]);
 
     std::vector<Sample> readSamples;
 
     while (inputStream.good()) {
-        inputStream.read(buffer, buf_size);
+        inputStream.read(buffer.get(), buf_size);
 
-        if (buf_size == inputStream.gcount()) {
+        if (buf_size == static_cast<size_t >(inputStream.gcount())) {
             if (buffer[buf_size - 1] != -1 && buffer[buf_size - 1] != 1) {
                 throw new MessageException("incorrect data format, you must write 1 for male or 255 for female.");
             }
@@ -57,7 +56,6 @@ std::vector<Sample> readDataFromFile(const std::string &filename) {
         }
     }
 
-    delete[] buffer;
     inputStream.close();
     return readSamples;
 }

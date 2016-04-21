@@ -20,9 +20,9 @@ public:
 
     size_t getWidthCoordinate() const;
 
-    const bool operator<(const Pixel &otherPixel) const;
+    bool operator<(const Pixel &otherPixel) const;
 
-    const bool operator!=(const Pixel &otherPixel) const;
+    bool operator!=(const Pixel &otherPixel) const;
 
     Pixel();
 };

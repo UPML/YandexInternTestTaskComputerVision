@@ -43,7 +43,7 @@ size_t Pixel::getWidthCoordinate() const {
 Pixel::Pixel(size_t heightCoordinate, size_t widthCoordinate) : heightCoordinate(heightCoordinate),
                                                                 widthCoordinate(widthCoordinate) { }
 
-const bool Pixel::operator<(const Pixel &otherPixel) const {
+bool Pixel::operator<(const Pixel &otherPixel) const {
     if (getWidthCoordinate() != otherPixel.getWidthCoordinate()) {
         return getWidthCoordinate() < otherPixel.getWidthCoordinate();
     } else {
@@ -51,7 +51,7 @@ const bool Pixel::operator<(const Pixel &otherPixel) const {
     }
 }
 
-const bool Pixel::operator!=(const Pixel &otherPixel) const {
+bool Pixel::operator!=(const Pixel &otherPixel) const {
     return (*this < otherPixel) || (otherPixel < *this);
 }
 

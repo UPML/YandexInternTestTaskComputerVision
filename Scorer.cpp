@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <ctime>
+#include <omp.h>
 #include "Scorer.h"
 #include "Utils.h"
 #include "AdaBoost.h"
@@ -56,12 +57,12 @@ double Scorer::getScore(const std::string &pictureSize) {
     AdaBoost adaBoost = AdaBoost(train, 0.01, 42);
     std::fstream fsOutput;
     fsOutput.open("result" + pictureSize + ".txt", std::fstream::out | std::fstream::app);
-    clock_t startIterate = std::clock();
-    for (size_t i = 0; i < 10; ++i) {
+    double startIterate = omp_get_wtime();
+    for (size_t i = 0; i < 100; ++i) {
         adaBoost.run(1);
         fsOutput << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
         std::cout << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
-        fsOutput << (std::clock() - startIterate) / static_cast<double > (CLOCKS_PER_SEC) << "\n";
+        fsOutput <<  omp_get_wtime() - startIterate << "\n";
     }
     fsOutput.close();
     return Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t());

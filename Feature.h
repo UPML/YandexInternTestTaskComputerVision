@@ -25,9 +25,9 @@ public:
 
     size_t getFeatureIndex() const;
 
-    const bool operator<(const Feature &otherFeature) const;
+    bool operator<(const Feature &otherFeature) const;
 
-    const bool operator==(const Feature &otherFeature) const;
+    bool operator==(const Feature &otherFeature) const;
     Feature();
 };
 

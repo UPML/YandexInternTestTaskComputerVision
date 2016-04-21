@@ -28,7 +28,7 @@ size_t Feature::getFeatureIndex() const {
     return featureIndex;
 }
 
-const bool Feature::operator<(const Feature &otherFeature) const {
+bool Feature::operator<(const Feature &otherFeature) const {
     if (firstPixel != otherFeature.firstPixel) {
         return firstPixel < otherFeature.firstPixel;
     } else if (secondPixel != otherFeature.secondPixel) {
@@ -38,7 +38,7 @@ const bool Feature::operator<(const Feature &otherFeature) const {
     }
 }
 
-const bool Feature::operator==(const Feature &otherFeature) const {
+bool Feature::operator==(const Feature &otherFeature) const {
     return !(*this < otherFeature) && !(otherFeature < *this);
 }
 

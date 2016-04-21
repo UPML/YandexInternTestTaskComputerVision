@@ -13,7 +13,7 @@ SampleContainer::SampleContainer(const std::vector<Sample> &samples) : samples(s
 }
 
 Sample SampleContainer::getSample(size_t index) const {
-    if (index < 0 && index >= samples.size()) {
+    if (index >= samples.size()) {
         throw new MessageException("incorrect index");
     }
     return samples[index];
@@ -84,11 +84,11 @@ std::vector<Feature> SampleContainer::getRandomFeature(std::mt19937 &generator,
     return generatedFeature;
 }
 
-const size_t SampleContainer::getHeight() const {
+size_t SampleContainer::getHeight() const {
     return getSample(0).getPicture().getHeight();
 }
 
-const size_t SampleContainer::getWidth() const {
+size_t SampleContainer::getWidth() const {
     return getSample(0).getPicture().getWidth();
 }
 

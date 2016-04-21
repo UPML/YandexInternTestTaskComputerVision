@@ -27,8 +27,8 @@ public:
 
     std::vector<Feature> getRandomFeature(std::mt19937 &generator, size_t numberOfGeneratedFeatures) const;
 
-    const size_t getHeight() const;
-    const size_t getWidth() const;
+    size_t getHeight() const;
+    size_t getWidth() const;
 
 private:
     size_t getNumberOfGirls();
