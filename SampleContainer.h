@@ -24,16 +24,17 @@ public:
 
     double getError(const Feature &feature) const;
 
-    double getSize() const;
 
-    Feature getRandomFeature() const;
+    std::vector<Feature> getRandomFeature(std::mt19937 &generator, size_t numberOfGeneratedFeatures) const;
+
+    const size_t getHeight() const;
+    const size_t getWidth() const;
 
 private:
     size_t getNumberOfGirls();
 
     size_t getNumberOfBoys();
 
-    Pixel randomPixel() const;
 };
 
 

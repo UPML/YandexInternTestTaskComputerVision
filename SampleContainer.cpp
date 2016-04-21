@@ -3,10 +3,14 @@
 //
 
 #include <iostream>
+#include <assert.h>
+#include <random>
 #include "SampleContainer.h"
 #include "MessageException.h"
 
-SampleContainer::SampleContainer(const std::vector<Sample> &samples) : samples(samples) { }
+SampleContainer::SampleContainer(const std::vector<Sample> &samples) : samples(samples) {
+    assert(samples.size() != 0);
+}
 
 Sample SampleContainer::getSample(size_t index) const {
     if (index < 0 && index >= samples.size()) {
@@ -63,21 +67,34 @@ double SampleContainer::getError(const Feature &feature) const {
     return sumError;
 }
 
-double SampleContainer::getSize() const {
-    return samples.size();
+
+std::vector<Feature> SampleContainer::getRandomFeature(std::mt19937 &generator,
+                                                       size_t numberOfGeneratedFeatures) const {
+    std::vector<Feature> generatedFeature;
+    generatedFeature.reserve(numberOfGeneratedFeatures);
+    std::uniform_int_distribution<size_t> uidFeatureIndex(0, FEATURE_NUMBER - 1);
+    std::uniform_int_distribution<size_t> uidPixelWidth(0, getWidth() - 1);
+    std::uniform_int_distribution<size_t> uidPixelHeight(0, getHeight() - 1);
+
+    for (size_t i = 0; i < numberOfGeneratedFeatures; ++i) {
+        generatedFeature.emplace_back(Feature(Pixel(uidPixelHeight(generator), uidPixelWidth(generator)),
+                                              Pixel(uidPixelHeight(generator), uidPixelWidth(generator)),
+                                              uidFeatureIndex(generator)));
+    }
+    return generatedFeature;
 }
 
-Feature SampleContainer::getRandomFeature() const {
-    Pixel first = randomPixel();
-    Pixel second = randomPixel();
-    return Feature(first, second, static_cast<size_t > (rand() % FEATURE_NUMBER));
+const size_t SampleContainer::getHeight() const {
+    return getSample(0).getPicture().getHeight();
 }
 
-Pixel SampleContainer::randomPixel() const {
-    size_t randomHeight = rand() % getSample(0).getPicture().getHeight();
-    size_t randomWidth = rand() % getSample(0).getPicture().getWidth();
-    return Pixel(randomHeight, randomWidth);
+const size_t SampleContainer::getWidth() const {
+    return getSample(0).getPicture().getWidth();
 }
+
+
+
+
 
 
 

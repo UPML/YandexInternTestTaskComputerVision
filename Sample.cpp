@@ -26,11 +26,14 @@ bool Sample::isMale() const {
     return male;
 }
 
-bool absDifferenceLessThan(const Picture picture, const Feature &feature, size_t maxDifference) {
-    return abs(
-            picture.getPixelIntensity(feature.getFirstPixel()) - picture.getPixelIntensity(feature.getSecondPixel())) <
-           maxDifference;
+namespace {
+    bool absDifferenceLessThan(const Picture &picture, const Feature &feature, size_t maxDifference) {
+        return abs(
+                picture.getPixelIntensity(feature.getFirstPixel()) -
+                picture.getPixelIntensity(feature.getSecondPixel())) <
+               maxDifference;
 
+    }
 }
 
 double Sample::getError(const Feature &feature) const {
@@ -42,21 +45,20 @@ Sample::Sample() {
 }
 
 double Sample::getPrediction(const Feature &feature) const {
-    if (!feature.indexIsCorrect()) {
-        throw new MessageException("incorrect feature index");
-    }
-    std::vector<bool> features;
-    features.reserve(FEATURE_NUMBER / 2);
-    features.push_back(
+
+    std::vector<bool> differenceBetweenPixels;
+    differenceBetweenPixels.reserve(FEATURE_NUMBER / 2);
+
+    differenceBetweenPixels.push_back(
             picture.getPixelIntensity(feature.getFirstPixel()) > picture.getPixelIntensity(feature.getSecondPixel()));
-    features.push_back(absDifferenceLessThan(picture, feature, 5));
-    features.push_back(absDifferenceLessThan(picture, feature, 10));
-    features.push_back(absDifferenceLessThan(picture, feature, 25));
-    features.push_back(absDifferenceLessThan(picture, feature, 50));
+    for (auto maxDifference : {5, 10, 25, 50}) {
+        differenceBetweenPixels.push_back(absDifferenceLessThan(picture, feature, (size_t) maxDifference));
+    };
+
     if (feature.getFeatureIndex() < FEATURE_NUMBER / 2) {
-        return features[feature.getFeatureIndex()];
+        return differenceBetweenPixels[feature.getFeatureIndex()];
     } else {
-        return !features[feature.getFeatureIndex() - FEATURE_NUMBER / 2];
+        return !differenceBetweenPixels[feature.getFeatureIndex() - FEATURE_NUMBER / 2];
     }
 }
 

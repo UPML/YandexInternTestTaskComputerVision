@@ -2,15 +2,18 @@
 // Created by kagudkov on 19.04.16.
 //
 
+#include <assert.h>
 #include "Feature.h"
 
 Feature::Feature(const Pixel &firstPixel, const Pixel &secondPixel, size_t featureIndex) : firstPixel(firstPixel),
-                                                                                           secondPixel(secondPixel),
-                                                                                           featureIndex(
-                                                                                                   featureIndex) { }
+                                                                                           secondPixel(secondPixel) {
+    assert(indexIsCorrect(featureIndex));
+    Feature::featureIndex = featureIndex;
 
-bool Feature::indexIsCorrect() const {
-    return featureIndex >= 0 && featureIndex < FEATURE_NUMBER;
+}
+
+bool Feature::indexIsCorrect(size_t index) const {
+    return index >= 0 && index < FEATURE_NUMBER;
 }
 
 const Pixel &Feature::getFirstPixel() const {
@@ -26,12 +29,12 @@ size_t Feature::getFeatureIndex() const {
 }
 
 const bool Feature::operator<(const Feature &otherFeature) const {
-    if (firstPixel != otherFeature.getFirstPixel()) {
-        return firstPixel < otherFeature.getFirstPixel();
-    } else if (secondPixel != otherFeature.getSecondPixel()) {
-        return secondPixel < otherFeature.getSecondPixel();
+    if (firstPixel != otherFeature.firstPixel) {
+        return firstPixel < otherFeature.firstPixel;
+    } else if (secondPixel != otherFeature.secondPixel) {
+        return secondPixel < otherFeature.secondPixel;
     } else {
-        return featureIndex < otherFeature.getFeatureIndex();
+        return featureIndex < otherFeature.featureIndex;
     }
 }
 
@@ -43,6 +46,7 @@ Feature::Feature() {
     firstPixel = Pixel();
     secondPixel = Pixel();
 }
+
 
 
 

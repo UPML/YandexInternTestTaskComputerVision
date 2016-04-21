@@ -3,7 +3,6 @@
 //
 
 #include <cmath>
-#include <assert.h>
 #include <ctime>
 #include "Scorer.h"
 #include "Utils.h"
@@ -43,7 +42,6 @@ Scorer::Scorer() {
 }
 
 double Scorer::getScore(const std::string &pictureSize) {
-    assert(pictureSize == "16x16" || pictureSize == "20x20" || pictureSize == "24x24");
     std::string inputDataFilename = "data/" + pictureSize + "/samples00.vec";
     std::vector<Sample> samples = Utils().readDataFromFile(inputDataFilename);
     std::vector<Sample> train;
@@ -55,13 +53,14 @@ double Scorer::getScore(const std::string &pictureSize) {
             test.push_back(samples[i]);
         }
     }
-    AdaBoost adaBoost = AdaBoost(train, 0.01);
+    AdaBoost adaBoost = AdaBoost(train, 0.01, 42);
     std::fstream fsOutput;
     fsOutput.open("result" + pictureSize + ".txt", std::fstream::out | std::fstream::app);
     clock_t startIterate = std::clock();
-    for (size_t i = 0; i < 1000; ++i) {
+    for (size_t i = 0; i < 10; ++i) {
         adaBoost.run(1);
         fsOutput << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
+        std::cout << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
         fsOutput << (std::clock() - startIterate) / static_cast<double > (CLOCKS_PER_SEC) << "\n";
     }
     fsOutput.close();

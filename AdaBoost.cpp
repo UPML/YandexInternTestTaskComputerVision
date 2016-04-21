@@ -7,15 +7,15 @@
 #include <algorithm>
 #include <iostream>
 
-void AdaBoost::init() {
+void AdaBoost::init(size_t randomSeed) {
     samples.initializeWeight();
-    srand(static_cast<unsigned int> (time(0)));
+    randomGenerator = std::mt19937(randomSeed);
 }
 
-AdaBoost::AdaBoost(const SampleContainer &samples, double percentGeneratedFeatures)
+AdaBoost::AdaBoost(const SampleContainer &samples, double percentGeneratedFeatures, size_t randomSeed)
         : samples(samples),
           percentGeneratedFeatures(percentGeneratedFeatures) {
-    init();
+    init(randomSeed);
 
 }
 
@@ -27,16 +27,16 @@ void AdaBoost::run(size_t numOfIteration) {
 
 void AdaBoost::doIteration() {
     std::vector<Feature> newTestedFeature;
-    while (newTestedFeature.size() < percentGeneratedFeatures * samples.getSize() * FEATURE_NUMBER) {
-        Feature nextRandomFeature = samples.getRandomFeature();
-        //изначально проверял, что раньше такой фичи не встречалось, но из-за этой проверки итерация выполнялась
-        // очень долго
-        newTestedFeature.push_back(nextRandomFeature);
-    }
+
+    size_t numberOfGeneratedFeature =
+            static_cast<size_t> (FEATURE_NUMBER * pow(samples.getHeight() * samples.getWidth(), 2) *
+                                 percentGeneratedFeatures);
+
+    newTestedFeature = samples.getRandomFeature(randomGenerator, numberOfGeneratedFeature);
 
     double minError = 1;
     Feature bestFeature = *newTestedFeature.begin();
-    for (Feature feature : newTestedFeature) {
+    for (const Feature &feature : newTestedFeature) {
         if (minError > samples.getError(feature)) {
             minError = samples.getError(feature);
             bestFeature = feature;

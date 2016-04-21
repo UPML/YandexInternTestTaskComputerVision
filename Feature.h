@@ -4,8 +4,7 @@
 #pragma once
 
 #include "Picture.h"
-
-#define FEATURE_NUMBER 10
+const size_t FEATURE_NUMBER = 10;
 
 class Feature {
 private:
@@ -15,9 +14,10 @@ private:
 
 
 public:
+
     Feature(const Pixel &firstPixel, const Pixel &secondPixel, size_t featureIndex);
 
-    bool indexIsCorrect() const;
+    bool indexIsCorrect(size_t index) const;
 
     const Pixel &getFirstPixel() const;
 
@@ -28,7 +28,6 @@ public:
     const bool operator<(const Feature &otherFeature) const;
 
     const bool operator==(const Feature &otherFeature) const;
-
     Feature();
 };
 
