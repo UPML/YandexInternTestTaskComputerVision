@@ -17,7 +17,7 @@ intensity Picture::getPixelIntensity(const Pixel &pixel) const {
 
 Picture::Picture(size_t height, size_t width, const std::vector<intensity> &pixels) : height(height), width(width),
 
-                                                                                      pixels(pixels) { }
+                                                                                               pixels(pixels) { }
 
 size_t Picture::getHeight() const {
     return height;

@@ -5,7 +5,7 @@
 #include <iostream>
 #include "MessageException.h"
 
-MessageException::MessageException(std::string message) {
+MessageException::MessageException(const std::string &message) {
     std::cerr << message << "\n";
 }
 

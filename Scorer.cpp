@@ -43,10 +43,10 @@ Scorer::Scorer() {
 
 double Scorer::getScore(const std::string &pictureSize) {
     std::string inputDataFilename = "data/" + pictureSize + "/samples00.vec";
-    std::vector<Sample> samples = Utils().readDataFromFile(inputDataFilename);
+    std::vector<Sample> samples = readDataFromFile(inputDataFilename);
     std::vector<Sample> train;
     std::vector<Sample> test;
-    for (int i = 0; i < samples.size(); ++i) {
+    for (size_t i = 0; i < samples.size(); ++i) {
         if (i < samples.size() * 0.8) {
             train.push_back(samples[i]);
         } else {

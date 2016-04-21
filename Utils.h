@@ -10,10 +10,6 @@
 #include "Sample.h"
 #include "MessageException.h"
 
-class Utils {
-
-public:
-    static std::vector<Sample> readDataFromFile(const std::string filename);
-};
+std::vector<Sample> readDataFromFile(const std::string &filename);
 
 

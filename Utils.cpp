@@ -2,31 +2,32 @@
 // Created by kagudkov on 19.04.16.
 //
 
+#include <bits/unique_ptr.h>
 #include "Utils.h"
 
-std::vector<Sample> Utils::readDataFromFile(const std::string filename) {
+std::vector<Sample> readDataFromFile(const std::string &filename) {
     std::ifstream inputStream;
     inputStream.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
     if (!inputStream.is_open()) {
         throw new MessageException(filename + " file not found.");
     }
 
-    size_t width;
-    size_t height;
+
     char c;
 
     if (!inputStream.get(c)) {
         throw new MessageException("can't read width");
     }
-    width = static_cast<size_t >(c);
+    size_t width = static_cast<size_t >(c);
 
     if (!inputStream.get(c)) {
         throw new MessageException("can't read height");
     }
-    height = static_cast<size_t>(c);
+    size_t height = static_cast<size_t>(c);
 
     //Читаем пиксели картинки и заодно пол.
     size_t buf_size = height * width + 1;
+    //todo заменить на unique_ptr
     char *buffer = new char[buf_size];
 
     std::vector<Sample> readSamples;
@@ -44,15 +45,15 @@ std::vector<Sample> Utils::readDataFromFile(const std::string filename) {
             for (size_t i = 0; i < buf_size; ++i) {
                 pixels.push_back(static_cast<intensity >(buffer[i]));
             }
-            Picture newPicture = Picture(height, width, pixels);
-            readSamples.push_back(Sample(newPicture, buffer[buf_size - 1] == 1));
+            Picture newPicture(height, width, pixels);
+            readSamples.emplace_back(Sample(newPicture, buffer[buf_size - 1] == 1));
 
         }
         else if (inputStream.eof()) {
             break;
         }
         else {
-            throw MessageException("Unexpected end of file.");
+            throw new MessageException("Unexpected end of file.");
         }
     }
 
