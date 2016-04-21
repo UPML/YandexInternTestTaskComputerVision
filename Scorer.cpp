@@ -58,7 +58,7 @@ double Scorer::getScore(const std::string &pictureSize) {
     std::fstream fsOutput;
     fsOutput.open("result" + pictureSize + ".txt", std::fstream::out | std::fstream::app);
     double startIterate = omp_get_wtime();
-    for (size_t i = 0; i < 100; ++i) {
+    for (size_t i = 0; i < 500; ++i) {
         adaBoost.run(1);
         fsOutput << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
         std::cout << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";

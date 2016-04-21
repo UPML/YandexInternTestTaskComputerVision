@@ -42,7 +42,7 @@ void AdaBoost::doIteration() {
         if (minError > nowError) {
 #pragma omp critical(updateMin)
             {
-                minError = samples.getError(newTestedFeature[i]);
+                minError = nowError;
                 bestFeature = newTestedFeature[i];
             }
         }

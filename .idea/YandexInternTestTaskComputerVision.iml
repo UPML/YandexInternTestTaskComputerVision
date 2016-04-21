@@ -9,13 +9,13 @@
       <sourceFolder url="file://$MODULE_DIR$/AdaBoost.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Feature.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/AdaBoost.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SampleContainer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Scorer.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Picture.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MessageException.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SampleContainer.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SampleContainer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Scorer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Picture.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SampleContainer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MessageException.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Picture.cpp" isTestSource="false" />
