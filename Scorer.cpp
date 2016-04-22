@@ -42,7 +42,8 @@ Scorer::Scorer() {
 
 }
 
-double Scorer::getScore(const std::string &pictureSize) {
+double Scorer::getScore(const std::string &pictureSize, size_t numberOfIteration, double percentOfTestedFeature,
+                        size_t seed) {
     std::string inputDataFilename = "data/" + pictureSize + "/samples00.vec";
     std::vector<Sample> samples = readDataFromFile(inputDataFilename);
     std::vector<Sample> train;
@@ -54,19 +55,19 @@ double Scorer::getScore(const std::string &pictureSize) {
             test.push_back(samples[i]);
         }
     }
-    AdaBoost adaBoost = AdaBoost(SampleContainer(train), 0.01, 42);
+    AdaBoost adaBoost = AdaBoost(SampleContainer(train), percentOfTestedFeature / 100, seed);
     std::fstream fsOutput;
     fsOutput.open("result" + pictureSize + ".txt", std::fstream::out | std::fstream::app);
     double startIterate = omp_get_wtime();
-    for (size_t i = 0; i < 10; ++i) {
+    for (size_t i = 0; i < numberOfIteration; ++i) {
         adaBoost.run(1);
         fsOutput << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
         std::cout << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
-        fsOutput <<  omp_get_wtime() - startIterate << "\n";
+        fsOutput << omp_get_wtime() - startIterate << "\n";
         fsOutput.flush();
     }
     fsOutput << "selectedFeatures\n\n";
-    for(size_t i = 0; i < adaBoost.getSelectedFeatures().size(); ++i){
+    for (size_t i = 0; i < adaBoost.getSelectedFeatures().size(); ++i) {
         adaBoost.getSelectedFeatures()[i].print(fsOutput);
         fsOutput << "Bt = " << adaBoost.getB_t()[i] << "\n";
     }

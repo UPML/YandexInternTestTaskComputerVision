@@ -10,7 +10,7 @@
 class MessageException : std::exception {
 
 public:
-    MessageException(const std::string &message);
+    explicit MessageException(const std::string &message);
 };
 
 

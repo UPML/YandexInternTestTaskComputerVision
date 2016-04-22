@@ -20,7 +20,8 @@ public:
                            const std::vector<double> &B_t);
 
 
-    static double getScore(std::string const &pictureSize);
+    static double getScore(std::string const &pictureSize, size_t numberOfIteration, double persentOfTestedFeature,
+                           size_t seed);
 };
 
 

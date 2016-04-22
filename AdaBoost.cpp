@@ -45,7 +45,6 @@ void AdaBoost::doIteration() {
                 if (minError > nowError) {
                     minError = nowError;
                     bestFeature = newTestedFeature[i];
-
                 }
             }
         }

@@ -2,7 +2,7 @@
 // Created by kagudkov on 19.04.16.
 //
 
-#include <bits/unique_ptr.h>
+#include <memory>
 #include "Utils.h"
 
 std::vector<Sample> readDataFromFile(const std::string &filename) {

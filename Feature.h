@@ -12,13 +12,12 @@ private:
     Pixel firstPixel;
     Pixel secondPixel;
     size_t featureIndex;
+    bool indexIsCorrect(size_t index) const;
 
 
 public:
 
     Feature(const Pixel &firstPixel, const Pixel &secondPixel, size_t featureIndex);
-
-    bool indexIsCorrect(size_t index) const;
 
     const Pixel &getFirstPixel() const;
 

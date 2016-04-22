@@ -2,7 +2,7 @@
 // Created by kagudkov on 19.04.16.
 //
 
-#include <assert.h>
+#include <cassert>
 #include "Feature.h"
 
 Feature::Feature(const Pixel &firstPixel, const Pixel &secondPixel, size_t featureIndex) : firstPixel(firstPixel),

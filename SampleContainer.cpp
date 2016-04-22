@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include <assert.h>
+#include <cassert>
 #include <random>
 #include "SampleContainer.h"
 #include "MessageException.h"
@@ -78,9 +78,9 @@ std::vector<Feature> SampleContainer::getRandomFeature(std::mt19937 &generator,
     std::uniform_int_distribution<size_t> uidPixelHeight(0, getHeight() - 1);
 
     for (size_t i = 0; i < numberOfGeneratedFeatures; ++i) {
-        generatedFeature.emplace_back(Feature(Pixel(uidPixelHeight(generator), uidPixelWidth(generator)),
+        generatedFeature.emplace_back(Pixel(uidPixelHeight(generator), uidPixelWidth(generator)),
                                               Pixel(uidPixelHeight(generator), uidPixelWidth(generator)),
-                                              uidFeatureIndex(generator)));
+                                              uidFeatureIndex(generator));
     }
     return generatedFeature;
 }
