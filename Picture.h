@@ -7,6 +7,7 @@ typedef unsigned char intensity;
 
 #include <cstdio>
 #include <vector>
+#include <fstream>
 
 class Pixel {
 private:
@@ -23,6 +24,8 @@ public:
     bool operator<(const Pixel &otherPixel) const;
 
     bool operator!=(const Pixel &otherPixel) const;
+
+    void print(std::fstream &output) const;
 
     Pixel();
 };

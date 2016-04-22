@@ -14,7 +14,12 @@ private:
 
 
 public:
-    SampleContainer(const std::vector<Sample> &samples);
+    explicit SampleContainer(std::vector<Sample> samples);
+
+    SampleContainer(const SampleContainer &sampleContainer) = default;
+    SampleContainer(SampleContainer &&sampleContainer);
+    SampleContainer&operator =(const SampleContainer &sampleContainer) = default;
+    SampleContainer&operator =(SampleContainer &&sampleContainer);
 
     Sample getSample(size_t index) const;
 
@@ -28,6 +33,7 @@ public:
     std::vector<Feature> getRandomFeature(std::mt19937 &generator, size_t numberOfGeneratedFeatures) const;
 
     size_t getHeight() const;
+
     size_t getWidth() const;
 
 private:

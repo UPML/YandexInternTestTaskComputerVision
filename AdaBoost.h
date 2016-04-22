@@ -20,7 +20,7 @@ private:
 public:
     const std::vector<double> &getB_t() const;
 
-    AdaBoost(const SampleContainer &samples, double percentGeneratedFeatures, size_t randomSeed);
+    AdaBoost(SampleContainer samples, double percentGeneratedFeatures, size_t randomSeed);
 
     void run(size_t numOfIteration);
 

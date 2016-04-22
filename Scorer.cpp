@@ -54,7 +54,7 @@ double Scorer::getScore(const std::string &pictureSize) {
             test.push_back(samples[i]);
         }
     }
-    AdaBoost adaBoost = AdaBoost(train, 0.01, 42);
+    AdaBoost adaBoost = AdaBoost(SampleContainer(train), 0.01, 42);
     std::fstream fsOutput;
     fsOutput.open("result" + pictureSize + ".txt", std::fstream::out | std::fstream::app);
     double startIterate = omp_get_wtime();
@@ -63,6 +63,12 @@ double Scorer::getScore(const std::string &pictureSize) {
         fsOutput << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
         std::cout << i << " " << Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t()) << " ";
         fsOutput <<  omp_get_wtime() - startIterate << "\n";
+    }
+    fsOutput << "selectedFeatures\n\n";
+    for(size_t i = 0; i < adaBoost.getSelectedFeatures().size(); ++i){
+        adaBoost.getSelectedFeatures()[i].print(fsOutput);
+        fsOutput << "Bt = " << adaBoost.getB_t()[i] << "\n";
+        fsOutput.flush();
     }
     fsOutput.close();
     return Scorer().getScore(test, adaBoost.getSelectedFeatures(), adaBoost.getB_t());

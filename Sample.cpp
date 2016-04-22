@@ -28,9 +28,9 @@ bool Sample::isMale() const {
 
 namespace {
     bool absDifferenceLessThan(const Picture &picture, const Feature &feature, size_t maxDifference) {
-        return abs(
+        return static_cast<size_t >(abs(
                 picture.getPixelIntensity(feature.getFirstPixel()) -
-                picture.getPixelIntensity(feature.getSecondPixel())) <
+                picture.getPixelIntensity(feature.getSecondPixel()))) <
                maxDifference;
 
     }

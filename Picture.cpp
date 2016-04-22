@@ -7,8 +7,7 @@
 
 
 intensity Picture::getPixelIntensity(const Pixel &pixel) const {
-    if (pixel.getHeightCoordinate() > height || pixel.getHeightCoordinate() < 0 ||
-        pixel.getWidthCoordinate() > width || pixel.getWidthCoordinate() < 0) {
+    if (pixel.getHeightCoordinate() > height || pixel.getWidthCoordinate() > width) {
         std::cerr << "Pixel has incorrect coordinate.\n Width: " << pixel.getWidthCoordinate() <<
         ". Height:" << pixel.getHeightCoordinate() << ",\n";
     }
@@ -17,7 +16,7 @@ intensity Picture::getPixelIntensity(const Pixel &pixel) const {
 
 Picture::Picture(size_t height, size_t width, const std::vector<intensity> &pixels) : height(height), width(width),
 
-                                                                                               pixels(pixels) { }
+                                                                                      pixels(pixels) { }
 
 size_t Picture::getHeight() const {
     return height;
@@ -58,6 +57,10 @@ bool Pixel::operator!=(const Pixel &otherPixel) const {
 Pixel::Pixel() {
     heightCoordinate = 0;
     widthCoordinate = 0;
+}
+
+void  Pixel::print(std::fstream &output) const {
+    output << "x = " << widthCoordinate << " y  = " << heightCoordinate << std::endl;
 }
 
 

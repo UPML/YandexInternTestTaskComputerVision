@@ -8,14 +8,15 @@
 #include "SampleContainer.h"
 #include "MessageException.h"
 
-SampleContainer::SampleContainer(const std::vector<Sample> &samples) : samples(samples) {
-    assert(samples.size() != 0);
+SampleContainer::SampleContainer(std::vector<Sample> samples) : samples(std::move(samples)) {
+    assert(SampleContainer::samples.size() != 0);
 }
 
 Sample SampleContainer::getSample(size_t index) const {
     if (index >= samples.size()) {
         throw new MessageException("incorrect index");
     }
+
     return samples[index];
 }
 
@@ -91,6 +92,18 @@ size_t SampleContainer::getHeight() const {
 size_t SampleContainer::getWidth() const {
     return getSample(0).getPicture().getWidth();
 }
+
+SampleContainer::SampleContainer(SampleContainer &&sampleContainer) : samples(std::move(sampleContainer.samples)) {
+}
+
+SampleContainer &SampleContainer::operator=(SampleContainer &&sampleContainer) {
+    samples = std::move(sampleContainer.samples);
+    return *this;
+}
+
+
+
+
 
 
 

@@ -55,7 +55,6 @@ std::vector<Sample> readDataFromFile(const std::string &filename) {
             throw new MessageException("Unexpected end of file.");
         }
     }
-
     inputStream.close();
     return readSamples;
 }

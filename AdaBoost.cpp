@@ -12,8 +12,8 @@ void AdaBoost::init(size_t randomSeed) {
     randomGenerator = std::mt19937(randomSeed);
 }
 
-AdaBoost::AdaBoost(const SampleContainer &samples, double percentGeneratedFeatures, size_t randomSeed)
-        : samples(samples),
+AdaBoost::AdaBoost(SampleContainer samples, double percentGeneratedFeatures, size_t randomSeed)
+        : samples(std::move(samples)),
           percentGeneratedFeatures(percentGeneratedFeatures) {
     init(randomSeed);
 

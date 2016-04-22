@@ -3,6 +3,7 @@
 //
 #pragma once
 
+#include <fstream>
 #include "Picture.h"
 const size_t FEATURE_NUMBER = 10;
 
@@ -26,6 +27,7 @@ public:
     size_t getFeatureIndex() const;
 
     bool operator<(const Feature &otherFeature) const;
+    void print(std::fstream &output) const;
 
     bool operator==(const Feature &otherFeature) const;
     Feature();

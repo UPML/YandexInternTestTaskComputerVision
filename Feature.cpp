@@ -13,7 +13,7 @@ Feature::Feature(const Pixel &firstPixel, const Pixel &secondPixel, size_t featu
 }
 
 bool Feature::indexIsCorrect(size_t index) const {
-    return index >= 0 && index < FEATURE_NUMBER;
+    return index < FEATURE_NUMBER;
 }
 
 const Pixel &Feature::getFirstPixel() const {
@@ -46,6 +46,16 @@ Feature::Feature() {
     firstPixel = Pixel();
     secondPixel = Pixel();
 }
+
+void Feature::print(std::fstream &output) const {
+    output << "first pixel: \n";
+    firstPixel.print(output);
+    output << "second pixel: \n";
+    secondPixel.print(output);
+    output << "index:" << featureIndex << std::endl;
+}
+
+
 
 
 
