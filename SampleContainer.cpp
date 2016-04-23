@@ -13,10 +13,7 @@ SampleContainer::SampleContainer(std::vector<Sample> samples) : samples(std::mov
 }
 
 Sample SampleContainer::getSample(size_t index) const {
-    if (index >= samples.size()) {
-        throw new MessageException("incorrect index");
-    }
-
+    assert(index < samples.size());
     return samples[index];
 }
 

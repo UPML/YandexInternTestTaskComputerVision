@@ -62,9 +62,9 @@ double Scorer::getScoreKFold(const std::string &pictureSize, size_t numberOfIter
         score = 0;
         for (size_t i = 0; i < adaBoosts.size(); ++i) {
             adaBoosts[i].run(1);
-            score += getScore(tests[i], adaBoosts[i].getSelectedFeatures(), adaBoosts[i].getB_t());
+            score += getScore(tests[i], adaBoosts[i].getSelectedFeatures(), adaBoosts[i].getB_t()) / adaBoosts.size();
         }
-        fsOutput << i << " " << score / numberOfFolds << " ";
+        fsOutput << i << " " << score << " ";
         fsOutput << omp_get_wtime() - startIterate << "\n";
         fsOutput.flush();
     }
