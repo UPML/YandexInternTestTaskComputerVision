@@ -30,7 +30,7 @@ public:
     double getError(const Feature &feature) const;
 
 
-    std::vector<Feature> getRandomFeature(std::mt19937 &generator, size_t numberOfGeneratedFeatures) const;
+    std::vector<Feature> getRandomFeaturePairs(std::mt19937 &generator, size_t numberOfGeneratedFeatures) const;
 
     size_t getHeight() const;
 

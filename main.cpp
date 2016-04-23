@@ -21,6 +21,6 @@ int main() {
     size_t seed;
     std::cin >> seed;
     std::cout << "score on picture with size " << pictureSize << " " <<
-    Scorer().getScore(pictureSize, numberOfIterations, percentage, seed);
+    Scorer().getScoreKFold(pictureSize, numberOfIterations, percentage, seed, 5);
     return 0;
 }

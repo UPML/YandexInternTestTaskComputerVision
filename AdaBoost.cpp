@@ -28,11 +28,11 @@ void AdaBoost::run(size_t numOfIteration) {
 void AdaBoost::doIteration() {
     std::vector<Feature> newTestedFeature;
 
-    size_t numberOfGeneratedFeature =
-            static_cast<size_t> (FEATURE_NUMBER * pow(samples.getHeight() * samples.getWidth(), 2) *
+    size_t numberOfPairsGeneratedFeature =
+            static_cast<size_t> (FEATURE_NUMBER / 2 * pow(samples.getHeight() * samples.getWidth(), 2) *
                                  percentGeneratedFeatures);
 
-    newTestedFeature = samples.getRandomFeature(randomGenerator, numberOfGeneratedFeature);
+    newTestedFeature = samples.getRandomFeaturePairs(randomGenerator, numberOfPairsGeneratedFeature);
 
     double minError = 1;
     Feature bestFeature = *newTestedFeature.begin();

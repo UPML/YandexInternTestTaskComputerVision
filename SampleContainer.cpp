@@ -69,7 +69,7 @@ double SampleContainer::getError(const Feature &feature) const {
 }
 
 
-std::vector<Feature> SampleContainer::getRandomFeature(std::mt19937 &generator,
+std::vector<Feature> SampleContainer::getRandomFeaturePairs(std::mt19937 &generator,
                                                        size_t numberOfGeneratedFeatures) const {
     std::vector<Feature> generatedFeature;
     generatedFeature.reserve(numberOfGeneratedFeatures);
@@ -78,9 +78,12 @@ std::vector<Feature> SampleContainer::getRandomFeature(std::mt19937 &generator,
     std::uniform_int_distribution<size_t> uidPixelHeight(0, getHeight() - 1);
 
     for (size_t i = 0; i < numberOfGeneratedFeatures; ++i) {
-        generatedFeature.emplace_back(Pixel(uidPixelHeight(generator), uidPixelWidth(generator)),
-                                              Pixel(uidPixelHeight(generator), uidPixelWidth(generator)),
-                                              uidFeatureIndex(generator));
+        //add a feature pair
+        size_t  featureIndex = uidFeatureIndex(generator);
+        Pixel firstPixel(uidPixelHeight(generator), uidPixelWidth(generator));
+        Pixel socondPixel(uidPixelHeight(generator), uidPixelWidth(generator));
+        generatedFeature.emplace_back(firstPixel,socondPixel,featureIndex);
+        generatedFeature.emplace_back(firstPixel,socondPixel,(featureIndex + FEATURE_NUMBER /2) % FEATURE_NUMBER );
     }
     return generatedFeature;
 }
